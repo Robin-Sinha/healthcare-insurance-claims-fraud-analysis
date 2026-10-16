@@ -1,6 +1,8 @@
 # Healthcare Insurance Claims and Fraud Risk Analysis
 
 ## Project Overview
+![Healthcare Claims Dashboard](healthcare-claims-dashboard.png)
+*Power BI dashboard showing claims performance, financial exposure and key risk indicators.*
 
 Healthcare insurance companies process large volumes of claims. Reviewing every claim manually can be time-consuming and identifying unusual claim amounts, differences between requested and approved amounts and patterns that may require further investigation can be challenging.
 
