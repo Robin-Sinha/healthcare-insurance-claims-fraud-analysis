@@ -2,17 +2,19 @@
 
 ## Project Overview
 
-Healthcare insurance companies process a large number of claims every day. Reviewing every claim manually can be time consuming and it can become difficult to identify unusual claim amounts, differences between requested and approved amounts and patterns that may require further investigation.
+Healthcare insurance companies process large volumes of claims. Reviewing every claim manually can be time-consuming and identifying unusual claim amounts, differences between requested and approved amounts and patterns that may require further investigation can be challenging.
 
-In this project, I analysed a dataset containing 10,000 healthcare insurance claims using Python and Power BI. The objective was to understand claims performance, examine financial differences between claims and approved amounts and identify patterns associated with claims labelled as potentially fraudulent in the dataset.
+In this project, I analysed a dataset containing 10,000 healthcare insurance claims using Python and Power BI. The objective was to understand claims performance, examine financial differences between requested and approved amounts and identify patterns associated with claims labelled as potentially fraudulent in the dataset.
 
-The analysis combines exploratory data analysis in Python with an interactive Power BI dashboard. The findings can help illustrate how claims data can support better monitoring and prioritisation of claims for further review.
+The analysis combines exploratory data analysis in Python with an interactive Power BI dashboard. It demonstrates how claims data can be used to monitor financial patterns and prioritise cases for further review.
+
+**Important:** This project uses synthetically generated data. The findings are exploratory and do not represent verified fraud cases from a real insurance company.
 
 ## Business Problem
 
 The main business problem was to understand where unusual patterns existed within healthcare insurance claims and which areas could benefit from closer review.
 
-The analysis focused on five questions.
+The analysis focused on five questions:
 
 1. What does the overall claims portfolio look like in terms of claim volume, claim amounts and approved amounts?
 2. How are claims distributed across approved, rejected and pending statuses?
@@ -23,158 +25,213 @@ The analysis focused on five questions.
 ## Tools Used
 
 **Python and Pandas**
-
-Used for data inspection, cleaning, validation and exploratory data analysis.
+- Data inspection and cleaning
+- Missing-value handling
+- Data type validation
+- Duplicate checks
+- Exploratory data analysis (EDA)
+- Comparative analysis of claim amounts and fraud labels
 
 **Power BI**
-
-Used to build an interactive dashboard with KPI cards, charts, date filters and category slicers.
+- Interactive dashboard development
+- KPI cards and financial measures
+- Trend analysis and category comparisons
+- Date filters and slicers
+- Diagnosis-level and provider-level analysis
+- Financial risk indicator visualisations
 
 ## Dataset Description
 
-The dataset contains 10,000 claim records and 20 columns. It includes claim identifiers, patient information, diagnosis and procedure codes, requested and approved amounts, submission dates, provider information, claim status and a fraud indicator.
+- **Dataset name:** Healthcare Fraud Detection Dataset
+- **Creator:** Nudrat Abbas
+- **Source:** Kaggle
+- **Licence shown on Kaggle:** CC0: Public Domain
+- **Data type:** Synthetically generated
+- **Dataset size:** 10,000 rows and 20 columns
 
-Important fields include Claim ID, Provider ID, Diagnosis Code, Procedure Code, Claim Amount, Approved Amount, Claim Submission Date, Days Between Service and Claim, Claim Status, Provider Specialty and Is Fraud.
+The dataset contains claim identifiers, patient information, diagnosis and procedure codes, requested and approved amounts, submission dates, provider information, claim status and a fraud indicator.
 
-The Is Fraud column provides the fraud label available in the dataset. The criteria used to assign these labels have not been independently verified. Therefore, the analysis identifies patterns associated with the supplied labels rather than confirming actual fraudulent activity.
+Important fields include `Claim_ID`, `Provider_ID`, `Diagnosis_Code`, `Procedure_Code`, `Claim_Amount`, `Approved_Amount`, `Claim_Submission_Date`, `Days_Between_Service_and_Claim`, `Claim_Status`, `Provider_Specialty` and `Is_Fraud`.
 
-The dataset source and licence should be documented using the original dataset page before the project is presented as a fully sourced portfolio case study.
+### Data Source and Limitations
+
+The dataset page on Kaggle identifies the data as synthetically generated and displays a CC0: Public Domain licence.
+
+Synthetic data is useful for practising data analysis and dashboard development. However, it may not fully represent real-world healthcare claims, provider behaviour or fraud patterns.
+
+The `Is_Fraud` column contains labels supplied with the dataset. The methodology used to assign these labels has not been independently verified.
+
+Therefore, the analysis identifies patterns associated with the supplied labels rather than confirming actual fraudulent activity. Provider-level and diagnosis-level findings should be interpreted as potential review indicators only.
 
 ## Python Analysis
 
-### Data Inspection
+### 1. Data Inspection
 
 I started by inspecting the dataset to understand its structure and the information available for analysis.
 
-I reviewed the first few records, checked column data types and examined summary statistics. I also checked missing values, duplicate records and the distribution of important categorical and numerical fields.
+The initial checks included:
+- Reviewing the first few records
+- Checking column names and data types
+- Examining summary statistics
+- Checking missing values
+- Identifying duplicate records
+- Reviewing categorical and numerical values
 
-This helped establish the quality of the data before drawing conclusions from it.
+These checks helped establish the quality of the data before conducting further analysis.
 
-### Data Cleaning
+### 2. Data Cleaning and Validation
 
-The dataset contained missing values in Insurance Type, Provider Specialty and Prior Visits in the Previous 12 Months.
+The dataset contained missing values in `Insurance_Type`, `Provider_Specialty` and `Prior_Visits_12m`.
 
-There were 350 missing values in Insurance Type and 350 missing values in Provider Specialty. These were replaced with Unknown so that the records could be retained without assigning unsupported category values.
+- **Insurance Type:** 350 missing values were replaced with `Unknown`.
+- **Provider Specialty:** 350 missing values were replaced with `Unknown`.
+- **Prior Visits:** 350 missing values were retained as missing because a missing value does not necessarily mean zero previous visits.
+- **Duplicate records:** No duplicate rows were found.
+- **Procedure Code:** Converted to a string data type because it represents a code rather than a numerical measurement.
+- **Financial validation:** Checked the relationship between claim amounts and approved amounts. No records were found where the approved amount exceeded the requested claim amount.
 
-The 350 missing values in Prior Visits in the Previous 12 Months were retained as missing. A missing value does not necessarily mean that a patient had zero prior visits so replacing these values with zero could have changed the meaning of the data.
+These steps helped preserve the meaning of the available data and reduce the risk of drawing conclusions from incorrect assumptions.
 
-I also checked for duplicate records and found no duplicate rows. Procedure Code was converted to a string data type because it represents a code rather than a numerical measurement.
+### 3. Exploratory Data Analysis
 
-I validated the relationship between Claim Amount and Approved Amount and found no records where the approved amount exceeded the requested claim amount.
+After cleaning the data, I examined claim volumes, financial amounts, claim statuses and the distribution of the dataset-provided fraud labels.
 
-### Exploratory Data Analysis
+I also compared patterns across diagnosis codes and providers. This helped identify areas where the observed fraud-labelled rates differed from the overall dataset.
 
-After cleaning the data, I examined the main variables to understand claim volumes, financial amounts, claim statuses and the distribution of the dataset-provided fraud labels.
-
-I also compared claim patterns across diagnosis codes and providers. This helped identify areas where the observed rates differed from the overall portfolio.
-
-The analysis was intended to identify patterns worth investigating rather than make definitive judgements about individual patients or providers.
+The analysis was designed to identify patterns for further investigation rather than make definitive judgements about individual patients or providers.
 
 ## Power BI Dashboard
 
 The Power BI report contains three pages. Each page addresses a different part of the business problem.
 
-### Page One: Claims Overview
+### Page 1: Claims Overview
 
 This page provides an overall view of claims performance and financial exposure.
 
-It includes KPI cards for total claims, fraud-labelled rate, total claim amount, total approved amount and average claim amount.
+It includes KPI cards for:
+- Total Claims
+- Fraud-Labelled Rate
+- Total Claim Amount
+- Total Approved Amount
+- Average Claim Amount
 
-A monthly claims trend chart helps explore changes in claim volumes over time. A claims status donut chart shows how claims are distributed across approved, rejected and pending categories.
+A monthly claims trend chart helps explore changes in claim volumes over time. A claims status donut chart shows the distribution of claims across approved, rejected and pending categories.
 
-Date, insurance type and claim status filters allow users to explore different parts of the portfolio.
+Date, insurance type and claim status slicers allow users to explore different parts of the portfolio.
 
-### Page Two: Diagnosis and Provider Analysis
+### Page 2: Diagnosis and Provider Analysis
 
 This page examines differences across diagnosis codes and healthcare providers.
 
-A diagnosis-level chart compares fraud-labelled rates across diagnosis categories. Provider charts show the highest claim volumes and the highest fraud-labelled rates.
+It includes:
+- Fraud-labelled rate by diagnosis code
+- Top 10 providers by claim volume
+- Top 10 providers by fraud-labelled rate
 
-Provider specialty, patient gender and patient state filters allow users to explore the results by different categories.
+Provider specialty, patient gender and patient state filters allow users to explore the results across different categories.
 
 Provider-level rates should always be considered alongside the number of claims behind each rate. A high rate based on a relatively small number of records may be less stable than a similar rate based on a larger sample.
 
-### Page Three: Fraud Risk Analysis
+These rankings are intended to support further review and should not be interpreted as evidence of wrongdoing.
+
+### Page 3: Fraud Risk Analysis
 
 This page compares the financial patterns of claims labelled as fraudulent and claims not labelled as fraudulent.
 
-A clustered column chart compares average claim amounts with average approved amounts for both groups. A separate bar chart compares the average difference between the requested and approved amounts.
-
-Claim submission delay and prior visit filters allow users to explore whether the results change across different groups of claims.
+It includes:
+- Average claim amount compared with average approved amount by fraud label
+- Average claim approval gap by fraud label
+- Claim submission delay and prior visit filters
 
 These comparisons help highlight financial patterns that may be useful when prioritising claims for further review. They do not establish that a claim is fraudulent.
 
 ## Key Findings
 
-### Overall Claims Portfolio
+The following figures describe the full dataset. Dashboard figures may vary when filters are applied.
 
-The dataset contains 10,000 claims. The average requested claim amount was 572.80 and the average approved amount was 475.51.
+### 1. Overall Claims Portfolio
 
-These figures provide a baseline for understanding the overall financial profile of the claims in the dataset.
+- Total claims: 10,000
+- Average requested claim amount: 572.80
+- Average approved amount: 475.51
 
-### Distribution of Fraud Labels
+These figures provide a baseline for understanding the financial profile of the dataset.
 
-A total of 829 claims were labelled as fraudulent in the dataset, representing 8.29 percent of all claims. The remaining 9,171 claims were not labelled as fraudulent.
+### 2. Distribution of Fraud Labels
 
-This percentage describes the supplied dataset labels. It should not be interpreted as a verified fraud rate for a real insurance company.
+- Claims labelled as fraudulent: 829
+- Claims not labelled as fraudulent: 9,171
+- Fraud-labelled rate: 8.29%
 
-### Diagnosis-Level Patterns
+This percentage represents the distribution of the supplied dataset labels. It should not be interpreted as a verified fraud rate for a real insurance company.
 
-Diagnosis code I25.10 had 1,025 claims and 102 fraud-labelled claims. Its fraud-labelled rate was approximately 9.95 percent.
+### 3. Diagnosis-Level Patterns
 
-Diagnosis code F41.9 had the lowest observed fraud-labelled rate at approximately 6.71 percent.
+Diagnosis code `I25.10` had 1,025 claims, including 102 fraud-labelled claims. Its observed fraud-labelled rate was approximately 9.95%.
 
-These differences suggest that diagnosis-level patterns can be useful for further investigation. They do not establish that any particular diagnosis is associated with confirmed fraud.
+Diagnosis code `F41.9` had the lowest observed fraud-labelled rate at approximately 6.71%.
 
-### Provider-Level Patterns
+These differences suggest that diagnosis-level analysis can help identify patterns for further investigation. They do not establish that any particular diagnosis is associated with confirmed fraud.
 
-Provider P0086 had the highest observed fraud-labelled rate at approximately 42.11 percent across 38 claims. Other providers also showed elevated rates in the dataset.
+### 4. Provider-Level Patterns
 
-These results are potential review indicators only. The number of claims, the underlying case details and the reliability of the supplied labels should be considered before drawing conclusions about a provider.
+Provider `P0086` had the highest observed fraud-labelled rate at approximately 42.11% across 38 claims.
 
-### Differences in Claim Amounts
+Other providers also showed elevated rates in the dataset.
 
-The average claim amount for fraud-labelled claims was 990.93 compared with 535.01 for claims not labelled as fraudulent.
+These results are potential review indicators only. Claim volumes, underlying case details and the reliability of the supplied labels should be considered before drawing conclusions about any provider.
 
-The average approved amount was 545.87 for fraud-labelled claims and 469.15 for claims not labelled as fraudulent.
+### 5. Differences in Claim Amounts
 
-The difference between the average requested and approved amounts was 445.06 for fraud-labelled claims compared with 65.85 for claims not labelled as fraudulent.
+The average claim amount was:
+- Fraud-labelled claims: 990.93
+- Claims not labelled as fraudulent: 535.01
+
+The average approved amount was:
+- Fraud-labelled claims: 545.87
+- Claims not labelled as fraudulent: 469.15
+
+The average difference between requested and approved amounts was:
+- Fraud-labelled claims: 445.06
+- Claims not labelled as fraudulent: 65.85
 
 The results show a substantial difference in the average financial gap between the two groups. This makes the gap a useful measure to examine when identifying claims that may require additional review.
 
+These are observed differences within synthetic data and should not be assumed to hold in actual insurance operations.
+
 ## Business Recommendations
 
-### Prioritise Claims with Unusual Financial Differences
+### 1. Prioritise Claims with Unusual Financial Differences
 
 Claims with unusually large differences between requested and approved amounts could be prioritised for a closer review of supporting documentation, policy coverage and approval decisions.
 
 A large difference alone should not be treated as evidence of fraud.
 
-### Review High-Risk Patterns Alongside Claim Volumes
+### 2. Review Patterns Alongside Claim Volumes
 
-Diagnosis and provider-level patterns can help guide further investigation. However, review decisions should consider claim volumes and relevant case details rather than relying only on a percentage or ranking.
+Diagnosis and provider-level patterns can help guide further investigation. Review decisions should consider the number of claims and relevant case details rather than relying only on a percentage or ranking.
 
-### Monitor Claim Amounts and Approval Patterns
+### 3. Monitor Claim Amounts and Approval Patterns
 
 Claims teams could monitor average claim amounts, approved amounts and the gap between them over time. This may help identify changes in financial patterns that deserve further investigation.
 
-### Use Multiple Indicators Before Escalating a Claim
+### 4. Use Multiple Indicators Before Escalating a Claim
 
 A review process should consider several indicators together, including claim amount, approval gap, submission delay, prior visits and relevant supporting documents.
 
 No single indicator should be used as proof of fraudulent activity.
 
-### Improve Data Quality and Label Transparency
+### 5. Improve Data Quality and Label Transparency
 
-Before using a model or dashboard for operational decisions, the organisation should understand how fraud labels were assigned, validate the accuracy of the labels and investigate missing data. This would help improve confidence in future analysis.
+Before using a model or dashboard for operational decisions, an organisation should understand how fraud labels were assigned and validate their accuracy. Missing data and other data quality issues should also be investigated.
 
 ## Project Limitations
 
-The analysis is based on the supplied dataset and does not represent verified claims data from a named insurance company.
-
-The methodology used to assign the Is Fraud labels has not been independently verified. The findings therefore describe associations within the dataset and do not confirm actual fraud.
-
-The analysis is exploratory. The results should be validated against supporting documentation and appropriate investigation procedures before being used to make operational decisions.
+- The dataset is synthetically generated and does not represent verified claims data from a named insurance company.
+- The methodology used to assign the `Is_Fraud` labels has not been independently verified.
+- The findings describe patterns within the supplied dataset and do not confirm actual fraud.
+- Provider-level rates may be influenced by the number of claims available for each provider.
+- The analysis is exploratory. Results should be validated against appropriate evidence and investigation procedures before being used for operational decisions.
 
 ## Conclusion
 
@@ -182,9 +239,8 @@ This project demonstrates how Python and Power BI can be used together to explor
 
 Python was used to inspect, clean and analyse the dataset. Power BI was used to turn the analysis into an interactive dashboard covering claims performance, diagnosis and provider patterns and differences in financial amounts.
 
-The key takeaway is that combining claim volumes, financial differences and multiple risk indicators can help prioritise cases for further review. The analysis also highlights the importance of data quality and careful interpretation when working with fraud labels.
+The key takeaway is that combining claim volumes, financial differences and multiple risk indicators can help prioritise cases for further review. The project also highlights the importance of data quality, transparent labelling and careful interpretation when working with synthetic fraud-labelled data.
 
 ## Skills Demonstrated
 
-Python, Pandas, data cleaning, exploratory data analysis, data validation, Power BI, dashboard development, KPI reporting, data visualisation and business recommendations.
-
+Python, Pandas, data cleaning, exploratory data analysis, data validation, Power BI, dashboard development, KPI reporting, data visualisation, financial analysis and business recommendations.
