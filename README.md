@@ -1,14 +1,12 @@
 # Healthcare Insurance Claims and Fraud Risk Analysis
 
 ## Project Overview
-![Healthcare Claims Dashboard](healthcare-claims-dashboard.png)
-*Power BI dashboard showing claims performance, financial exposure and key risk indicators.*
 
-Healthcare insurance companies process large volumes of claims. Reviewing every claim manually can be time-consuming and identifying unusual claim amounts, differences between requested and approved amounts and patterns that may require further investigation can be challenging.
+Healthcare insurance companies process large volumes of claims. Reviewing every claim manually can be time-consuming, and identifying unusual claim amounts, differences between requested and approved amounts, and patterns that may require further investigation can be challenging.
 
-In this project, I analysed a dataset containing 10,000 healthcare insurance claims using Python and Power BI. The objective was to understand claims performance, examine financial differences between requested and approved amounts and identify patterns associated with claims labelled as potentially fraudulent in the dataset.
+In this project, I analysed a dataset containing **10,000 healthcare insurance claims** using Python and Power BI. The objective was to understand claims performance, examine financial differences between requested and approved amounts, and identify patterns associated with claims labelled as potentially fraudulent in the dataset.
 
-The analysis combines exploratory data analysis in Python with an interactive Power BI dashboard. It demonstrates how claims data can be used to monitor financial patterns and prioritise cases for further review.
+The analysis combines exploratory data analysis in Python with an interactive Power BI dashboard to monitor financial patterns and prioritise cases for further review.
 
 **Important:** This project uses synthetically generated data. The findings are exploratory and do not represent verified fraud cases from a real insurance company.
 
@@ -104,7 +102,7 @@ The analysis was designed to identify patterns for further investigation rather 
 
 ## Power BI Dashboard
 
-The Power BI report contains three pages. Each page addresses a different part of the business problem.
+The Power BI report contains three interactive pages. Each page addresses a different part of the business problem.
 
 ### Page 1: Claims Overview
 
@@ -121,6 +119,8 @@ A monthly claims trend chart helps explore changes in claim volumes over time. A
 
 Date, insurance type and claim status slicers allow users to explore different parts of the portfolio.
 
+![Claims Overview](healthcare-claims-dashboard.png)
+
 ### Page 2: Diagnosis and Provider Analysis
 
 This page examines differences across diagnosis codes and healthcare providers.
@@ -136,6 +136,8 @@ Provider-level rates should always be considered alongside the number of claims 
 
 These rankings are intended to support further review and should not be interpreted as evidence of wrongdoing.
 
+![Diagnosis and Provider Analysis](Diagnosis%20and%20Provider%20Analysis.png)
+
 ### Page 3: Fraud Risk Analysis
 
 This page compares the financial patterns of claims labelled as fraudulent and claims not labelled as fraudulent.
@@ -146,6 +148,8 @@ It includes:
 - Claim submission delay and prior visit filters
 
 These comparisons help highlight financial patterns that may be useful when prioritising claims for further review. They do not establish that a claim is fraudulent.
+
+![Fraud Risk Analysis](Fraud%20Risk%20Analysis.png)
 
 ## Key Findings
 
