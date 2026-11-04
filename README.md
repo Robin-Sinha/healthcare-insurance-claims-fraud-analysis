@@ -10,6 +10,10 @@ The analysis combines exploratory data analysis in Python with an interactive Po
 
 **Important:** This project uses synthetically generated data. The findings are exploratory and do not represent verified fraud cases from a real insurance company.
 
+## Business Question
+
+**How can a healthcare insurance claims team identify unusual claim patterns and prioritise claims for further investigation by analysing claim amounts, approval gaps, diagnosis codes and provider-level trends?**
+
 ## Business Problem
 
 The main business problem was to understand where unusual patterns existed within healthcare insurance claims and which areas could benefit from closer review.
